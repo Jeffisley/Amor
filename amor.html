@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nosso Amor</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+      color: #660033;
+      transition: background 1s, color 1s;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, p {
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    .coracoes {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .coracoes::before, .coracoes::after {
+      content: "♥";
+      font-size: 3em;
+      color: rgba(255, 105, 180, 0.2);
+      position: absolute;
+      animation: flutuar 8s linear infinite;
+    }
+
+    .coracoes::after {
+      left: 80%;
+      animation-delay: 4s;
+    }
+
+    @keyframes flutuar {
+      0% { top: 100%; opacity: 0; }
+      50% { opacity: 1; }
+      100% { top: -10%; opacity: 0; }
+    }
+
+    .fotos {
+      padding: 20px;
+      margin: 30px 0;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      gap: 15px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .fotos img {
+      display: inline-block;
+      max-height: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-right: 15px;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .fotos img:hover {
+      transform: scale(1.05);
+    }
+
+    .contador-container {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 1.2em;
+    }
+
+    #contador {
+      font-size: 1.5em;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+
+    .localizacao img {
+      max-width: 90%;
+      margin: 20px auto;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .youtube {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .rodape {
+      text-align: center;
+      font-size: 0.8em;
+      margin-top: 50px;
+      color: #555;
+    }
+
+    .timeline-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .timeline-carousel img {
+      max-height: 200px;
+      border-radius: 15px;
+      scroll-snap-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .modal img,
+    .modal video {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 15px;
+    }
+
+    .modal p {
+      color: white;
+      font-size: 1.2em;
+      margin-top: 1em;
+      text-align: center;
+    }
+
+    .modal .close, .modal .prev, .modal .next {
+      position: absolute;
+      top: 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+    }
+
+    .modal .close { right: 20px; }
+    .modal .prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .modal .next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+    .carta {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      color: #b30059;
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+      font-size: 1.2em;
+      line-height: 1.6;
+      font-family: 'Courier New', monospace;
+    }
+
+    .carta .texto {
+      max-width: 600px;
+      white-space: pre-wrap;
+      overflow: hidden;
+      border-left: 3px solid #b30059;
+      padding-left: 15px;
+    }
+
+    .fechar-carta {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #b30059;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="coracoes"></div>
+  <div class="carta" id="carta">
+    <div class="texto" id="textoCarta"></div>
+    <button class="fechar-carta" onclick="document.getElementById('carta').style.display='none'">Fechar</button>
+  </div>
+
+  <h1>O nosso amor foi escrito nas estrelas.</h1>
+  
+  <div class="fotos">
+  <img src="https://www.dropbox.com/scl/fi/sb6wyduu9shu60vzo3xaa/IMG-20250509-WA0067.jpg?rlkey=wfcdtnxeaifo63gcrclteh4p4&raw=1" alt="Foto 1" />
+  <img src="https://www.dropbox.com/scl/fi/34hgb0a1t3im4cdgqsytj/IMG-20250509-WA0061.jpg?rlkey=5ruy63gld4ptgdtb87sqy36ar&raw=1" alt="Foto 2" />
+  <img src="https://www.dropbox.com/scl/fi/y47dx53716fz9tyyvynrq/IMG-20250301-WA0101.jpg?rlkey=duzld1j979ppdzsgwwtw52d4k&raw=1" alt="Foto 3" />
+  <img src="https://www.dropbox.com/scl/fi/mm811b1g99u6txmxo0apn/IMG-20250217-WA0065.jpg?rlkey=e89rtx748jcan551ku95t1w31&raw=1" alt="Foto 4" />
+</div>
+
+  <div class="contador-container">
+    <h2>Desde o início de nossa história...</h2>
+    <div id="contador"></div>
+  </div>
+
+  <h2>Quando o mar viu nascer um novo amor.</h2>
+  <div class="localizacao">
+    <img src="https://www.dropbox.com/scl/fi/0i1tfz9dm1k21vfkjmukp/Screenshot_2025-06-11-03-37-23-190_com.google.android.apps.maps-edit.jpg?rlkey=we6o6q244271y7j9w3wsqg5a6&raw=1" alt="Mapa da Praia" />
+  </div>
+  
+<p><em>E essa canção finalmente fez sentido.</em></p>
+  <div class="youtube" style="margin-top: 10px">
+    <iframe width="360" height="215" src="https://www.youtube.com/embed/eVcymgUsgFs" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <h2>Timeline do nosso amor</h2>
+  <div class="timeline-carousel" id="timeline"></div>
+
+  <div class="modal" id="modal">
+    <button class="close" onclick="fecharModal()">×</button>
+    <button class="prev" onclick="navegar(-1)">❮</button><img id="modalImg" src="" alt="" />
+<video id="modalVideo" controls style="display: none; max-width: 90vw; max-height: 80vh; border-radius: 15px;"></video>
+<p id="modalTexto"></p>
+    <button class="next" onclick="navegar(1)">❯</button>
+  </div>
+
+<div id="musica-sugestao" style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap; flex-direction: column;">
+  <h2 style="color: #660033; font-family: 'Segoe UI', sans-serif;">Para lembrar da gente:</h2>
+  
+  <div style="display: flex; align-items: center; gap: 30px;">
+    <!-- Ícone de fone -->
+    <div id="icone-fone" title="Clique para ouvir uma sugestão" style="
+      font-size: 48px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    ">🎧</div>
+
+    <!-- Música sorteada -->
+    <div id="musica-mpb" style="
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #660033;
+      font-family: 'Segoe UI', sans-serif;
+      min-width: 240px;
+      text-align: center;
+    "></div>
+  </div>
+</div>
+
+<script>
+  const musicas = [
+  "🎵 'Aquarela' – Toquinho 🎶",
+  "🎶 'Trem-Bala' – Ana Vilela 🎵",
+  "🎵 'Velha Infância' – Tribalistas 🎶",
+  "🎶 'O Leãozinho' – Caetano Veloso 🎵",
+  "🎵 'Fotografia' – Tom Jobim & Elis Regina 🎶",
+  "🎶 'Se' – Djavan 🎵",
+  "🎵 'Pais e Filhos' – Legião Urbana 🎶",
+  "🎶 'Sina' – Djavan 🎵",
+  "🎵 'Como Nossos Pais' – Belchior 🎶",
+  "🎶 'Palpite' – Vanessa Rangel 🎵",
+  "🎵 'Pupila' – Anavitória e Vitor Kley 🎶",
+  "🎶 'Amor Pra Recomeçar' – Frejat 🎵",
+  "🎵 'Me Namora' – Natiruts 🎶",
+  "🎶 'Não Me Deixe Só' – Vanessa da Mata 🎵",
+  "🎵 'Anjos (Pra Quem Tem Fé)' – O Rappa 🎶",
+  "🎶 'Te Ver Superar' – Matheus & Kauan ft. Marília Mendonça 🎵",
+  "🎵 'Ai, Amor' – Anavitória 🎶",
+  "🎶 'De Janeiro a Janeiro' – Roberta Campos e Nando Reis 🎵",
+  "🎵 'Você Pra Mim' – Mahmundi 🎶",
+  "🎶 'Ainda Bem' – Marisa Monte 🎵",
+  "🎵 'Coisa Linda' – Tiago Iorc 🎶",
+  "🎶 'Morada' – Gilsons 🎵",
+  "🎵 'Várias Queixas' – Gilsons e Jovem Dionisio 🎶",
+  "🎶 'Sobre Nós' – Melim 🎵",
+  "🎵 'Amei Te Ver' – Tiago Iorc 🎶",
+  "🎶 'Dengo' – João Gomes 🎵",
+  "🎵 'Leão' – Marília Mendonça 🎶",
+  "🎶 Perfect – Ed Sheeran 🎶",
+    "🎶 All of Me – John Legend 🎶",
+    "🎶 Until I Found You – Stephen Sanchez 🎶",
+    "🎶 Just the Way You Are – Bruno Mars 🎶",
+    "🎶 Thinking Out Loud – Ed Sheeran 🎶",
+    "🎶 Say You Won’t Let Go – James Arthur 🎶",
+    "🎶 Can’t Help Falling in Love – Elvis Presley 🎶",
+    "🎶 Lover – Taylor Swift 🎶",
+    "🎶 Best Part – Daniel Caesar feat. H.E.R. 🎶",
+    "🎶 Come Away With Me – Norah Jones 🎶"
+];
+
+  document.getElementById("icone-fone").addEventListener("click", () => {
+    const musica = musicas[Math.floor(Math.random() * musicas.length)];
+    const campoMusica = document.getElementById("musica-mpb");
+
+    campoMusica.style.opacity = 0;
+    setTimeout(() => {
+      campoMusica.textContent = musica;
+      campoMusica.style.opacity = 1;
+    }, 200);
+  });
+</script>
+<footer style="text-align: center; padding: 2em; margin-top: 50px; background-color: #fff0f5; color: #660033; font-family: 'Segoe UI', sans-serif;">
+    <p style="font-size: 1.2em; max-width: 700px; margin: 0 auto;">
+      "No fim, estarei aqui, te amando por cada detalhe que tens... Por cada ação que faz. Sou eu quem estará ao seu lado para quando precisar. Daquele que te ama muito, Kauã."
+    </p>
+  </footer>
+
+
+  <div class="rodape" style="margin-top: 20px">
+    <div>♥️</div>
+    <div>©2025, feito com carinho, de seu marido: Jeffisley.</div>
+  </div>
+
+  <script>
+    const imagensTimeline = [
+      {
+        src: "https://www.dropbox.com/scl/fi/6pds8teq0lx2g7tyqeuds/Screenshot_2025-06-11-03-50-20-036_com.whatsapp-edit.jpg?rlkey=33yqao1xs8otsdylf3bm7s97q&raw=1",
+        frase: "27/10/2024 - Uma mordida, o inicio de uma história."
+      },
+      {
+        src: "https://www.dropbox.com/scl/fi/k3f3uii21k9oi4tjoqxce/tg0w1o753fsd1.jpeg?rlkey=z70qfar92ngq5cajbzyio05ub&raw=1",
+        frase: "06/11/2024 - Nosso primeiro 'você tem 18, né?'."
+      },
+      {
+        src: "https://www.dropbox.com/scl/fi/yhrnuligmfq2dz7odcwcf/Screenshot_2025-06-11-03-54-45-738_com.whatsapp-edit.jpg?rlkey=lz2huahxmyq4f4w8iqhxlw7zq&raw=1",
+        frase: "07/12/2024 - Um clichê rápido mas, eficaz."
+      },
+      {
+        src: "https://www.dropbox.com/scl/fi/o3wa9jdjuea9qejj79ep2/IMG-20250215-WA0015.jpg?rlkey=58fmxojjono34xpiq4kkvwvw3&raw=1",
+        frase: "15/02/2025 - A junção de um mero mortal e uma deusa."
+      },
+      {
+        src: "https://www.dropbox.com/scl/fi/yptmynn29pob0q991k9h3/IMG-20250215-WA0007.jpg?rlkey=m9ukl272qdcxvk9u6syui11hc&raw=1",
+        frase: "13/02/2025 - Nossa primeira viagem juntos."
+      },
+      {
+        src: "https://www.dropbox.com/scl/fi/oo3ofz27rr2xvjawn3qvz/IMG-20241225-WA0195.jpg?rlkey=0kqupqc69nkwskeu7wa0h39ww&raw=1",
+        frase: "25/12/2024 - O presente de natal foi o seu 'te amo'."
+      },
+      {
+  tipo: "video",
+  src: "https://www.dropbox.com/scl/fi/sn95pyxh6h379xtxgrnoi/lv_7500223413215071549_20250611051557.mp4?rlkey=xn7cxkytcyrfouowrdesu0wbe&raw=1",
+  frase: "12/06/2025 - O agora que ainda é só o começo."
+}
+
+    ];
+
+    const timelineContainer = document.getElementById('timeline');
+    imagensTimeline.forEach((item, index) => {
+  let el;
+  if (item.tipo === "video") {
+    el = document.createElement('video');
+    el.src = item.src;
+    el.controls = true;
+    el.style.maxHeight = "200px";
+    el.style.borderRadius = "15px";
+    el.style.cursor = "pointer";
+    el.style.flexShrink = "0";
+    el.onclick = () => abrirModal(index);
+  } else {
+    el = document.createElement('img');
+    el.src = item.src;
+    el.alt = `Imagem ${index + 1}`;
+    el.onclick = () => abrirModal(index);
+  }
+  el.style.scrollSnapAlign = "center";
+  timelineContainer.appendChild(el);
+});
+
+    let modalIndex = 0;
+    function abrirModal(index) {
+      modalIndex = index;
+      document.getElementById('modalImg').src = imagensTimeline[index].src;
+      document.getElementById('modalTexto').textContent = imagensTimeline[index].frase;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function fecharModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function navegar(direcao) {
+      modalIndex = (modalIndex + direcao + imagensTimeline.length) % imagensTimeline.length;
+      abrirModal(modalIndex);
+    }
+
+    function atualizarContador() {
+      const inicio = new Date("2025-02-15T00:00:00");
+      const agora = new Date();
+
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      let dias = agora.getDate() - inicio.getDate();
+      let horas = agora.getHours() - inicio.getHours();
+      let minutos = agora.getMinutes() - inicio.getMinutes();
+
+      if (minutos < 0) { minutos += 60; horas--; }
+      if (horas < 0) { horas += 24; dias--; }
+      if (dias < 0) {
+        meses--;
+        const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += ultimoMes;
+      }
+      if (meses < 0) { meses += 12; anos--; }
+
+      const totalMeses = anos * 12 + meses;
+
+      document.getElementById("contador").textContent = `${totalMeses} meses, ${dias} dias, ${horas} horas e ${minutos} minutos`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    const cartaTexto = "Dedico a você as mais doces palavras já criadas. Pois você é aquela que quero ao meu lado e que almejo um futuro junto... Pois é simples como qualquer um pode ver: estamos destinados a ser. Nosso amor rompe barreiras e destrói empecilhos... E eu sou um homem feliz por dizer em voz alta que te amo, Evelyn.";
+    let i = 0;
+    function digitarCarta() {
+      if (i < cartaTexto.length) {
+        document.getElementById("textoCarta").textContent += cartaTexto.charAt(i);
+        i++;
+        setTimeout(digitarCarta, 50);
+      }
+    }
+    window.onload = digitarCarta;
+  </script>
+  
+  <!-- Botão flutuante -->
+<style>
+  #fraseBotao {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff6699;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 999;
+    transition: background-color 0.3s ease;
+  }
+
+  #fraseBotao:hover {
+    background-color: #e60073;
+  }
+
+  #caixaFrase {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #fff0f5;
+    border: 1px solid #ff99cc;
+    border-radius: 15px;
+    padding: 15px 20px;
+    max-width: 250px;
+    color: #b30059;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+    font-size: 14px;
+    display: none;
+    z-index: 998;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<!-- Elementos HTML -->
+<button id="fraseBotao">💖 </button>
+<div id="caixaFrase"></div>
+
+<!-- Script JS -->
+<script>
+  const frases = [
+    "Você é a razão do meu melhor sorriso.",
+    "A cada batida do meu coração, há amor por você.",
+    "Estar com você transforma tudo em poesia.",
+    "Meu mundo é mais bonito desde que você chegou.",
+    "Amar você é a minha forma favorita de viver.",
+    "Lembre-se que estou aqui.",
+    "Te encontrar foi o início da minha felicidade.",
+    "Mesmo em silêncio, seu amor me fala alto.",
+    "Com você, os dias têm mais cor e mais sentido.",
+    "Te amo de um jeito que nem o tempo entende.",
+    "Prefiro morrer amanhã do que viver 100 anos sem te conhecer.",
+    "Onde quer que você esteja, é lá que eu quero estar.",
+    "Eu acho que eu sentiria a sua falta até mesmo se nunca tivéssemos nos conhecido.",
+  ];
+
+  const botao = document.getElementById("fraseBotao");
+  const caixa = document.getElementById("caixaFrase");
+
+  botao.addEventListener("click", () => {
+    const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    caixa.textContent = fraseAleatoria;
+    caixa.style.display = "block";
+
+    // Oculta após 6 segundos
+    setTimeout(() => {
+      caixa.style.display = "none";
+    }, 6000);
+  });
+</script>
+</body>
+</html>
