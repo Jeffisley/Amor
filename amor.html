@@ -36,8 +36,8 @@
     }
 
     .coracoes::after {
-      left: 80%;
-      animation-delay: 2s;
+      left: 90%;
+      animation-delay: 1s;
     }
 
     @keyframes flutuar {
@@ -250,7 +250,7 @@
     z-index: 1000;
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
-    Aprecie.
+    Aprecie
   </button>
 
   <!-- Áudio da música -->
@@ -367,9 +367,40 @@ document.getElementById("botaoMusica").addEventListener("click", () => {
   </div>
 
   <h2>Quando o mar viu nascer um novo amor.</h2>
-  <div class="localizacao">
-    <img src="https://www.dropbox.com/scl/fi/0i1tfz9dm1k21vfkjmukp/Screenshot_2025-06-11-03-37-23-190_com.google.android.apps.maps-edit.jpg?rlkey=we6o6q244271y7j9w3wsqg5a6&raw=1" alt="Mapa da Praia" style= "width: 300px; max-width: 100%; height: auto;"/>
-  </div>
+ <div class="localizacao-container">
+  <img src="https://www.dropbox.com/scl/fi/dk8ssf9fo0imoiohyh3qf/_A_mimir._-removebg-preview.png?rlkey=dhh4y7kvtpn64hv0dz91oo0nv&raw=1"
+       alt="Imagem Esquerda" class="lado" />
+
+  <img src="https://www.dropbox.com/scl/fi/0i1tfz9dm1k21vfkjmukp/Screenshot_2025-06-11-03-37-23-190_com.google.android.apps.maps-edit.jpg?rlkey=we6o6q244271y7j9w3wsqg5a6&raw=1"
+       alt="Mapa da Praia" class="mapa" />
+
+  <img src="https://www.dropbox.com/scl/fi/4lbzab0wzrgzcxf09aulc/_A_mimir.___1_-removebg-preview.png?rlkey=sv8wcvo62l9ga928xqrpxn3mo&raw=1"
+       alt="Imagem Direita" class="lado" />
+</div>
+
+<style>
+  .localizacao-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+
+  .localizacao-container img.mapa {
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .localizacao-container img.lado {
+    width: 120px;
+    height: auto;
+    max-width: 100%;
+  }
+</style>
   
 <p><em>E essa canção finalmente fez sentido.</em></p>
 
