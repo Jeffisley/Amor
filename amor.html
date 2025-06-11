@@ -200,77 +200,11 @@
       cursor: pointer;
       border-radius: 10px;
     }
-    .meteors {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-  }
 
   </style>
 </head>
 <body>
-  
-  <!-- Estrelas cadentes -->
-<canvas id="meteors"></canvas>
 
-<script>
-  const canvas = document.getElementById("meteors");
-  const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let meteors = [];
-
-  function createMeteor() {
-    const x = Math.random() * canvas.width;
-    const y = -20;
-    const length = Math.random() * 80 + 40;
-    const speed = Math.random() * 3 + 2;
-    meteors.push({ x, y, length, speed });
-  }
-
-  function drawMeteors() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "rgba(255,255,255,0.8)";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-
-    for (let i = 0; i < meteors.length; i++) {
-      const m = meteors[i];
-      ctx.beginPath();
-      ctx.moveTo(m.x, m.y);
-      ctx.lineTo(m.x + m.length, m.y + m.length);
-      ctx.stroke();
-
-      m.x += m.speed;
-      m.y += m.speed;
-
-      // remove meteoro que saiu da tela
-      if (m.y > canvas.height || m.x > canvas.width) {
-        meteors.splice(i, 1);
-        i--;
-      }
-    }
-  }
-
-  function animate() {
-    drawMeteors();
-    requestAnimationFrame(animate);
-  }
-
-  setInterval(createMeteor, 1000);
-  animate();
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
-  
   <!-- Botão para tocar música e ativar animação -->
   <button id="playMusic" style="
     position: fixed;
