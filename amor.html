@@ -200,10 +200,7 @@
       cursor: pointer;
       border-radius: 10px;
     }
-<!-- Estrelas cadentes -->
-<canvas id="meteors"></canvas>
-
-  #meteors {
+    .meteors {
     position: fixed;
     top: 0;
     left: 0;
@@ -212,6 +209,13 @@
     pointer-events: none;
     z-index: 0;
   }
+
+  </style>
+</head>
+<body>
+  
+  <!-- Estrelas cadentes -->
+<canvas id="meteors"></canvas>
 
 <script>
   const canvas = document.getElementById("meteors");
@@ -266,9 +270,7 @@
     canvas.height = window.innerHeight;
   });
 </script>
-  </style>
-</head>
-<body>
+  
   <!-- Botão para tocar música e ativar animação -->
   <button id="playMusic" style="
     position: fixed;
