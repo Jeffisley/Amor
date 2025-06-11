@@ -203,7 +203,7 @@
   </style>
 </head>
 <body>
-<!-- Botão de ativação de áudio -->
+  <!-- Botão para tocar música e ativar animação -->
   <button id="playMusic" style="
     position: fixed;
     top: 20px;
@@ -215,11 +215,12 @@
     border-radius: 30px;
     cursor: pointer;
     z-index: 1000;
-    font-size: 20px;
+    font-size: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
-    ▶️ Ouvir nossa música
+    💖 Ouvir nossa música / Emojis
   </button>
 
+  <!-- Áudio da música -->
   <audio id="loveSong" loop>
     <source src="https://www.dropbox.com/scl/fi/89sht9gmze941grjd6nxy/Kiss-I-Was-Made-For-Lovin-You.mp3?rlkey=f1gaylzfb97yllz6kepg5q88t&raw=1" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
@@ -228,16 +229,19 @@
   <script>
     const playButton = document.getElementById("playMusic");
     const loveSong = document.getElementById("loveSong");
+    let musicStarted = false;
 
     playButton.addEventListener("click", () => {
-      loveSong.play();
-      playButton.style.display = "none";
+      if (!musicStarted) {
+        loveSong.play();
+        musicStarted = true;
+      }
       iniciarEfeitos();
     });
 
     function iniciarEfeitos() {
       for (let i = 0; i < 50; i++) {
-        setTimeout(() => criarEmoji(), i * 150);
+        setTimeout(() => criarEmoji(), i * 100);
       }
     }
 
@@ -267,7 +271,7 @@
       }
     }
   </style>
-
+  
   <div class="coracoes"></div>
   <div class="carta" id="carta">
     <div class="texto" id="textoCarta"></div>
@@ -514,10 +518,10 @@
     background-color: #ff6699;
     color: white;
     border: none;
-    padding: 15px 20px;
+    padding: 30px 40px;
     border-radius: 50px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
+    font-size: 32px;
     cursor: pointer;
     z-index: 999;
     transition: background-color 0.3s ease;
@@ -534,12 +538,12 @@
     background-color: #fff0f5;
     border: 1px solid #ff99cc;
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 30px 40px;
     max-width: 250px;
     color: #b30059;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-style: italic;
-    font-size: 14px;
+    font-size: 28px;
     display: none;
     z-index: 998;
     animation: fadeIn 0.5s ease-in-out;
