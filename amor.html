@@ -296,47 +296,6 @@
     }
   </script>
 
-    <script>
-const letraTraduzida = [
-  "Esta noite eu quero te dar tudo",
-  "No escuro",
-  "Há tanto que eu quero fazer",
-  "E esta noite eu quero deixar aos seus pés",
-  "Porque, garota, eu fui feito para te amar",
-  "E você foi feita para me amar",
-  "E eu não posso parar de te amar",
-  "E você não pode parar de me amar também",
-  "Esta noite, quero ver isso nos seus olhos",
-  "Sinta a magia",
-  "Algo que me leva ao paraíso",
-  "Porque esta noite, estamos em chamas",
-  "E viveremos nosso maior desejo",
-  "Você sabe que foi feita para mim",
-  "E eu fui feito para você"
-];
-
-function exibirLetraTraduzida() {
-  const container = document.getElementById("letra-container");
-  container.innerHTML = ""; // limpa antes de repetir
-
-  letraTraduzida.forEach((linha, i) => {
-    const span = document.createElement("div");
-    span.classList.add("fade-line");
-    span.style.animationDelay = `${i * 4}s`;
-    span.textContent = linha;
-    container.appendChild(span);
-  });
-}
-
-// Você pode chamar essa função quando a música começar:
-const audio = new Audio("https://www.dropbox.com/scl/fi/89sht9gmze941grjd6nxy/Kiss-I-Was-Made-For-Lovin-You.mp3?rlkey=f1gaylzfb97yllz6kepg5q88t&raw=1");
-
-document.getElementById("botaoMusica").addEventListener("click", () => {
-  audio.play();
-  exibirLetraTraduzida();
-});
-</script>
-
   <style>
     @keyframes fall {
       to {
@@ -396,7 +355,7 @@ document.getElementById("botaoMusica").addEventListener("click", () => {
   }
 
   .localizacao-container img.lado {
-    width: 120px;
+    width: 300px;
     height: auto;
     max-width: 100%;
   }
