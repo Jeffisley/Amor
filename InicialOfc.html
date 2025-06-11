@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeffisley & Evelyn</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffe6f0, #ffccd9);
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #b30059;
+      overflow: hidden;
+      animation: fadeIn 2s ease-in-out;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      font-family: 'Georgia', cursive;
+      margin: 20px;
+      animation: glow 3s ease-in-out infinite alternate;
+      word-break: break-word;
+      max-width: 90%;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #ff99cc, 0 0 10px #ff6699, 0 0 20px #ff66b2;
+      }
+      to {
+        text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff3399, 0 0 30px #ff0066;
+      }
+    }
+
+    button {
+      padding: 16px 32px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 15px;
+      background-color: #ff6699;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #e60073;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      button {
+        padding: 14px 28px;
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Jeffisley & Evelyn</h1>
+  <button onclick="window.location.href='amor.html'">
+    ❤️ A experiência do verdadeiro amor
+  </button>
+</body>
+</html>
