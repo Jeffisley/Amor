@@ -211,11 +211,11 @@
     background-color: #ff6699;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 20px 40px;
     border-radius: 30px;
     cursor: pointer;
     z-index: 1000;
-    font-size: 14px;
+    font-size: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
     ▶️ Ouvir nossa música
   </button>
@@ -231,9 +231,42 @@
 
     playButton.addEventListener("click", () => {
       loveSong.play();
-      playButton.style.display = "none"; // esconde o botão após ativar
+      playButton.style.display = "none";
+      iniciarEfeitos();
     });
+
+    function iniciarEfeitos() {
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => criarEmoji(), i * 150);
+      }
+    }
+
+    function criarEmoji() {
+      const emojis = ['❤️', '💖', '💘', '💝', '🎉', '🎊'];
+      const emoji = document.createElement("div");
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.position = "fixed";
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.top = "-50px";
+      emoji.style.fontSize = Math.random() * 20 + 20 + "px";
+      emoji.style.opacity = 0.9;
+      emoji.style.animation = "fall 3s linear forwards";
+      emoji.style.zIndex = 999;
+
+      document.body.appendChild(emoji);
+
+      setTimeout(() => emoji.remove(), 4000);
+    }
   </script>
+
+  <style>
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
 
   <div class="coracoes"></div>
   <div class="carta" id="carta">
@@ -261,9 +294,6 @@
   </div>
   
 <p><em>E essa canção finalmente fez sentido.</em></p>
-  <div class="youtube" style="margin-top: 10px">
-    <iframe width="360" height="215" src="https://www.youtube.com/embed/eVcymgUsgFs" frameborder="0" allowfullscreen></iframe>
-  </div>
 
   <h2>Timeline do nosso amor</h2>
   <div class="timeline-carousel" id="timeline"></div>
