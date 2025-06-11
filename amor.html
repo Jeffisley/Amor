@@ -203,11 +203,37 @@
   </style>
 </head>
 <body>
+<!-- Botão de ativação de áudio -->
+  <button id="playMusic" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ff6699;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+    ▶️ Ouvir nossa música
+  </button>
 
-<audio autoplay loop>
-  <source src="https://www.dropbox.com/scl/fi/89sht9gmze941grjd6nxy/Kiss-I-Was-Made-For-Lovin-You.mp3?rlkey=f1gaylzfb97yllz6kepg5q88t&raw=1" type="audio/mpeg">
-  Seu navegador não suporta áudio HTML5.
-</audio>
+  <audio id="loveSong" loop>
+    <source src="https://www.dropbox.com/scl/fi/89sht9gmze941grjd6nxy/Kiss-I-Was-Made-For-Lovin-You.mp3?rlkey=f1gaylzfb97yllz6kepg5q88t&raw=1" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <script>
+    const playButton = document.getElementById("playMusic");
+    const loveSong = document.getElementById("loveSong");
+
+    playButton.addEventListener("click", () => {
+      loveSong.play();
+      playButton.style.display = "none"; // esconde o botão após ativar
+    });
+  </script>
 
   <div class="coracoes"></div>
   <div class="carta" id="carta">
